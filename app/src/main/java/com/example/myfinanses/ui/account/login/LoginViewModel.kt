@@ -1,7 +1,7 @@
 package com.example.myfinanses.ui.account.login
 
 import androidx.lifecycle.*
-import com.example.myfinanses.repositoris.signUp
+import com.example.myfinanses.repositoris.signIn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -25,7 +25,7 @@ class LoginViewModel : ViewModel() {
 
     fun logIn() {
         viewModelScope.launch(Dispatchers.IO) {
-            _logIn.signUp(email.value!!, password.value!!)
+            _logIn.signIn(email.value!!, password.value!!)
         }
     }
 
