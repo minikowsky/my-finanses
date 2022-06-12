@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/micos/AndroidStudioProjects/my-finanses/app/src/main/res/layout/activity_account.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/micos/AndroidStudioProjects/my-finanses/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/micos/AndroidStudioProjects/my-finanses/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/SemVI/MIM/MyFinanses/My Finanses/app/src/main/res/layout/activity_account.xml" value="0.36615384615384616" />
+        <entry key="..\:/SemVI/MIM/MyFinanses/My Finanses/app/src/main/res/layout/activity_main.xml" value="0.19166666666666668" />
+        <entry key="..\:/SemVI/MIM/MyFinanses/My Finanses/app/src/main/res/layout/fragment_login.xml" value="0.371875" />
+        <entry key="..\:/SemVI/MIM/MyFinanses/My Finanses/app/src/main/res/layout/fragment_register.xml" value="0.18" />
+        <entry key="..\:/SemVI/MIM/MyFinanses/My Finanses/app/src/main/res/menu/menu_login_register.xml" value="0.36512820512820515" />
       </map>
     </option>
   </component>

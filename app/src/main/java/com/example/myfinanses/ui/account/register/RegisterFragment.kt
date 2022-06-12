@@ -1,39 +1,36 @@
-package com.example.myfinanses.ui.account.login
+package com.example.myfinanses.ui.account.register
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.myfinanses.R
-import com.example.myfinanses.databinding.FragmentLoginBinding
+import com.example.myfinanses.databinding.FragmentRegisterBinding
 import com.example.myfinanses.ui.extensions.showSnackBar
-import com.example.myfinanses.ui.main.MainActivity
 import com.example.myfinanses.ui.providers.SnackBarProvider
 
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentRegisterBinding
     private lateinit var snackBarProvider: SnackBarProvider
-    private val viewModel = LoginViewModel()
+    private val viewModel = RegisterViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_login,
+            R.layout.fragment_register,
             container,
             false
         )
-
         return binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@LoginFragment.viewModel
+            viewModel = this@RegisterFragment.viewModel
         }.root
     }
 
@@ -42,18 +39,11 @@ class LoginFragment : Fragment() {
 
         snackBarProvider = SnackBarProvider(requireActivity())
 
-        viewModel.login.observe(viewLifecycleOwner) { values ->
+        viewModel.register.observe(viewLifecycleOwner) { values ->
             snackBarProvider.showSnackBar(values)
-
-            if(values.first) {
-                startMainActivity()
+            if(values.first){
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment);
             }
         }
-    }
-    private fun startMainActivity() {
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
-        startActivity(intent)
     }
 }
