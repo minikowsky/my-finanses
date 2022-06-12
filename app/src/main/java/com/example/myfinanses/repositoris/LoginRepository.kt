@@ -15,11 +15,9 @@ class LoginRepository {
 fun MutableLiveData<Pair<Boolean, String>>.signIn(email: String, password: String) {
     FirebaseReference.authFB.signInWithEmailAndPassword(email, password)
         .addOnSuccessListener {
-            Log.d("Sign In", "User $email just signed in!")
             this.postValue(Pair(true, LoginRepository.LOGIN_SUCCESS))
         }
         .addOnFailureListener {
-            Log.d("Test", "Attempt $email to sign up was refused!")
             this.postValue(Pair(false, LoginRepository.LOGIN_ERROR))
         }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.myfinanses.R
 import com.example.myfinanses.databinding.FragmentRegisterBinding
 import com.example.myfinanses.ui.extensions.showSnackBar
@@ -40,6 +41,9 @@ class RegisterFragment : Fragment() {
 
         viewModel.register.observe(viewLifecycleOwner) { values ->
             snackBarProvider.showSnackBar(values)
+            if(values.first){
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment);
+            }
         }
     }
 }
