@@ -10,4 +10,7 @@
     <string name="password_again">password again</string>
     <string name="login_button">LogIn</string>
     <string name="sign_up">Sign Up</string>
+    <string name="home_budget">Home budget</string>
+    <string name="investments">Investments</string>
+    <string name="user_data">User data</string>
 </resources>

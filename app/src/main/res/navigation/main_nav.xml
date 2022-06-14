@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeBudgetFragment">
+
+    <fragment
+        android:id="@+id/homeBudgetFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.HomeBudgetFragment"
+        android:label="fragment_home_budget"
+        tools:layout="@layout/fragment_home_budget" >
+        <action
+            android:id="@+id/action_homeBudgetFragment_to_investFragment"
+            app:destination="@id/investFragment" />
+        <action
+            android:id="@+id/action_homeBudgetFragment_to_userDataFragment"
+            app:destination="@id/userDataFragment" />
+        <action
+            android:id="@+id/action_homeBudgetFragment_to_homeBudgetExpenseFragment"
+            app:destination="@id/homeBudgetExpenseFragment" />
+        <action
+            android:id="@+id/action_homeBudgetFragment_to_homeBudgetIncomeFragment"
+            app:destination="@id/homeBudgetIncomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeBudgetExpenseFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.HomeBudgetExpenseFragment"
+        android:label="fragment_home_budget_expense"
+        tools:layout="@layout/fragment_home_budget_expense" />
+    <fragment
+        android:id="@+id/homeBudgetIncomeFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.HomeBudgetIncomeFragment"
+        android:label="fragment_home_budget_income"
+        tools:layout="@layout/fragment_home_budget_income" />
+    <fragment
+        android:id="@+id/investFragment"
+        android:name="com.example.myfinanses.ui.main.invest.InvestFragment"
+        android:label="fragment_invest"
+        tools:layout="@layout/fragment_invest" >
+        <action
+            android:id="@+id/action_investFragment_to_investAddFragment"
+            app:destination="@id/investAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/investAddFragment"
+        android:name="com.example.myfinanses.ui.main.invest.InvestAddFragment"
+        android:label="fragment_invest_add"
+        tools:layout="@layout/fragment_invest_add" />
+    <fragment
+        android:id="@+id/userDataFragment"
+        android:name="com.example.myfinanses.ui.main.userdata.UserDataFragment"
+        android:label="fragment_user_data"
+        tools:layout="@layout/fragment_user_data" />
+</navigation>
