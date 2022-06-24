@@ -3,14 +3,14 @@ package com.example.myfinanses.ui.providers
 import android.app.AlertDialog
 import android.content.Context
 
-class DeleteTransactionDialogProvider(val context: Context) {
+class LogOutDialogProvider(val context: Context) {
 
-    fun show(positiveResult: () -> Unit, transactionName: String) {
+    fun show(positiveResult: () -> Unit) {
 
         val builder = AlertDialog.Builder(context)
 
-        builder.setTitle("Removing Transaction")
-        builder.setMessage("Are you sure you want to delete ${transactionName}?")
+        builder.setTitle("Log Out")
+        builder.setMessage("Are you sure you want to log out?")
         builder.setCancelable(false)
         builder.setNegativeButton("NO") { dialog, _ -> dialog.cancel() }
         builder.setPositiveButton("YES") { _, _ -> positiveResult() }

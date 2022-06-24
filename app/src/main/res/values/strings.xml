@@ -26,4 +26,12 @@
     <string name="type_item">Type :</string>
     <string name="name_item">Name :</string>
     <string name="all">All</string>
+    <string name="logout">Log Out</string>
+    <string name="First_name">First Name</string>
+    <string name="Last_name">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="changeEmail">Change Email</string>
+    <string name="changePassword">Change Password</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
 </resources>

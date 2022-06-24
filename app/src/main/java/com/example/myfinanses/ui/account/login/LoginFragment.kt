@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.myfinanses.R
 import com.example.myfinanses.databinding.FragmentLoginBinding
+import com.example.myfinanses.firebase.FirebaseReference
+import com.example.myfinanses.firebase.FirebaseReference.database
+import com.example.myfinanses.firebase.FirebaseReference.userReference
 import com.example.myfinanses.ui.extensions.showSnackBar
 import com.example.myfinanses.ui.main.MainActivity
 import com.example.myfinanses.ui.providers.SnackBarProvider
@@ -45,12 +48,14 @@ class LoginFragment : Fragment() {
         viewModel.login.observe(viewLifecycleOwner) { values ->
             snackBarProvider.showSnackBar(values)
 
-            if(values.first) {
+            if (values.first) {
                 startMainActivity()
             }
         }
     }
+
     private fun startMainActivity() {
+        userReference = database.getReference(FirebaseReference.authFB.currentUser!!.uid)
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }

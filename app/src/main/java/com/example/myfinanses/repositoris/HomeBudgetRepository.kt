@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.myfinanses.firebase.FirebaseReference
 import com.example.myfinanses.models.Transaction
 import com.example.myfinanses.models.TypeTransaction
+import com.example.myfinanses.models.User
 import com.example.myfinanses.repositoris.HomeBudgetRepository.Companion.CORRECT_DELETE
 import com.example.myfinanses.repositoris.HomeBudgetRepository.Companion.ERROR_DELETE
 import com.google.firebase.database.DataSnapshot
@@ -36,6 +37,21 @@ class HomeBudgetRepository {
                         }
                     }
                     addTransaction(listTransactions.reversed())
+                }
+            })
+    }
+
+    fun getUserInfo(
+        addUserInfo: (User) -> Unit
+    ) {
+        FirebaseReference.userReference.child("UserInfo")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(User::class.java)!!
+                    addUserInfo(user)
                 }
             })
     }
@@ -76,7 +92,8 @@ fun MutableLiveData<Pair<Boolean, String>>.deleteTransaction(
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (row in snapshot.children) {
                     if (row.getValue(Transaction::class.java)!! == transaction) {
-                        FirebaseReference.userReference.child(date).child(row.key!!).removeValue()
+                        FirebaseReference.userReference.child(date).child(row.key!!)
+                            .removeValue()
                         result.postValue(Pair(true, CORRECT_DELETE))
                     }
                 }
