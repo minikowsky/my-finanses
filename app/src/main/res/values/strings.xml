@@ -25,6 +25,5 @@
     <string name="date_item">Date :</string>
     <string name="type_item">Type :</string>
     <string name="name_item">Name :</string>
-
-
+    <string name="all">All</string>
 </resources>

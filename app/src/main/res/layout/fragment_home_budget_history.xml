@@ -26,6 +26,43 @@
             android:textSize="40sp"
             android:textStyle="bold" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/incomes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/incomes"
+                android:onClick="@{()->viewModel.getIncomes()}"
+                android:text="@string/incomes"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/all" />
+
+            <Button
+                android:id="@+id/all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="@{()->viewModel.getAllTransactions()}"
+                android:text="@string/all"
+                app:layout_constraintLeft_toRightOf="@id/incomes"
+                app:layout_constraintRight_toLeftOf="@id/expenses" />
+
+            <Button
+                android:id="@+id/expenses"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/expense"
+                android:onClick="@{()->viewModel.getExpenses()}"
+                android:text="@string/expenses"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toRightOf="@id/all"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

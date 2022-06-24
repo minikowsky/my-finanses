@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myfinanses.managers.DateManager
 import com.example.myfinanses.managers.TransactionManager
 import com.example.myfinanses.models.Transaction
+import com.example.myfinanses.models.TypeTransaction
 import com.example.myfinanses.repositoris.HomeBudgetRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,7 +43,10 @@ class HomeBudgetViewModel : ViewModel() {
 
     private fun getTransactions() {
         viewModelScope.launch(Dispatchers.IO) {
-            homeBudgetRepository.getTransactions(date.value!!) { list -> addTransactions(list) }
+            homeBudgetRepository.getTransactions(
+                date.value!!,
+                TypeTransaction.ALL
+            ) { list -> addTransactions(list) }
         }
     }
 
