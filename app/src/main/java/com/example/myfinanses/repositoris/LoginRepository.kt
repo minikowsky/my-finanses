@@ -1,6 +1,5 @@
 package com.example.myfinanses.repositoris
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myfinanses.firebase.FirebaseReference
 

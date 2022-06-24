@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeBudgetFragment"
-        android:name="com.example.myfinanses.ui.main.homebudget.HomeBudgetFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.main.HomeBudgetFragment"
         android:label="fragment_home_budget"
         tools:layout="@layout/fragment_home_budget" >
         <action
@@ -22,17 +22,28 @@
         <action
             android:id="@+id/action_homeBudgetFragment_to_homeBudgetIncomeFragment"
             app:destination="@id/homeBudgetIncomeFragment" />
+        <action
+            android:id="@+id/action_homeBudgetFragment_to_homeBudgetHistoryFragment"
+            app:destination="@id/homeBudgetHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeBudgetExpenseFragment"
-        android:name="com.example.myfinanses.ui.main.homebudget.HomeBudgetExpenseFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.expense.HomeBudgetExpenseFragment"
         android:label="fragment_home_budget_expense"
-        tools:layout="@layout/fragment_home_budget_expense" />
+        tools:layout="@layout/fragment_home_budget_expense" >
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/homeBudgetIncomeFragment"
-        android:name="com.example.myfinanses.ui.main.homebudget.HomeBudgetIncomeFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.income.HomeBudgetIncomeFragment"
         android:label="fragment_home_budget_income"
-        tools:layout="@layout/fragment_home_budget_income" />
+        tools:layout="@layout/fragment_home_budget_income" >
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/investFragment"
         android:name="com.example.myfinanses.ui.main.invest.InvestFragment"
@@ -52,4 +63,13 @@
         android:name="com.example.myfinanses.ui.main.userdata.UserDataFragment"
         android:label="fragment_user_data"
         tools:layout="@layout/fragment_user_data" />
+    <fragment
+        android:id="@+id/homeBudgetHistoryFragment"
+        android:name="com.example.myfinanses.ui.main.homebudget.history.HomeBudgetHistoryFragment"
+        android:label="fragment_home_budget_history"
+        tools:layout="@layout/fragment_home_budget_history" >
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
 </navigation>
