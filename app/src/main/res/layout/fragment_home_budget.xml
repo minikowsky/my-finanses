@@ -1,108 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.homebudget.HomeBudgetFragment"
-    android:orientation="vertical">
+    tools:context=".ui.main.homebudget.main.HomeBudgetFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home budget"
-        android:layout_gravity="center"
-        android:textSize="34sp"/>
+    <data>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\u2190"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:text="July"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\u2192"/>
-    </LinearLayout>
+        <variable
+            name="viewModel"
+            type="com.example.myfinanses.ui.main.homebudget.main.HomeBudgetViewModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="20dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="Balance"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:layout_marginBottom="20dp"
-            android:text="27000 zł"/>
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="Incomes"/>
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="@string/home_budget"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:onClick="@{()->viewModel.previousMonth()}"
+                android:src="@drawable/ic_baseline_arrow_back" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="8dp"
+                android:gravity="center"
+                android:text="@={viewModel.date}"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:onClick="@{()->viewModel.nextMonth()}"
+                android:src="@drawable/ic_baseline_arrow_forward" />
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="@string/balance"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@={viewModel.balance}"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="@string/incomes"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@={viewModel.incomes}"
             android:textColor="@color/green"
-            android:layout_marginBottom="20dp"
-            android:text="12000 zł"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="Expenses"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="@string/expenses"
+            android:textSize="25sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@={viewModel.expenses}"
             android:textColor="@color/red"
-            android:layout_marginBottom="20dp"
-            android:textSize="30sp"
-            android:text="27000 zł"/>
-    </LinearLayout>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="@string/add_income" />
+
+            <Button
+                android:id="@+id/expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/add_expense" />
+
+        </LinearLayout>
 
         <Button
+            android:id="@+id/history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:text="Add income"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Add expense"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="@string/history" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="History"/>
-
-</LinearLayout>
+</layout>

@@ -1,42 +1,41 @@
-package com.example.myfinanses.ui.account.login
+package com.example.myfinanses.ui.main.homebudget.expense
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.myfinanses.R
-import com.example.myfinanses.databinding.FragmentLoginBinding
-import com.example.myfinanses.firebase.FirebaseReference
-import com.example.myfinanses.firebase.FirebaseReference.database
-import com.example.myfinanses.firebase.FirebaseReference.userReference
+import com.example.myfinanses.databinding.FragmentHomeBudgetExpenseBinding
 import com.example.myfinanses.ui.extensions.showSnackBar
-import com.example.myfinanses.ui.main.MainActivity
 import com.example.myfinanses.ui.providers.SnackBarProvider
 
-class LoginFragment : Fragment() {
+class HomeBudgetExpenseFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private val args: HomeBudgetExpenseFragmentArgs by navArgs()
+    private lateinit var viewModel: HomeBudgetExpenseViewModel
+    private lateinit var binding: FragmentHomeBudgetExpenseBinding
     private lateinit var snackBarProvider: SnackBarProvider
-    private val viewModel = LoginViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_login,
+            R.layout.fragment_home_budget_expense,
             container,
             false
         )
 
+        viewModel = HomeBudgetExpenseViewModel(args.date)
+
         return binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@LoginFragment.viewModel
+            viewModel = this@HomeBudgetExpenseFragment.viewModel
         }.root
     }
 
@@ -45,20 +44,12 @@ class LoginFragment : Fragment() {
 
         snackBarProvider = SnackBarProvider(requireActivity())
 
-        viewModel.login.observe(viewLifecycleOwner) { values ->
+        viewModel.addExpense.observe(viewLifecycleOwner) { values ->
             snackBarProvider.showSnackBar(values)
 
             if (values.first) {
-                startMainActivity()
+                findNavController().popBackStack()
             }
         }
-    }
-
-    private fun startMainActivity() {
-        userReference = database.getReference(FirebaseReference.authFB.currentUser!!.uid)
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
-        startActivity(intent)
     }
 }

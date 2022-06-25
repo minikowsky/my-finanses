@@ -4,6 +4,7 @@
     tools:context=".ui.account.register.RegisterFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.myfinanses.ui.account.register.RegisterViewModel" />
@@ -25,28 +26,44 @@
             android:textStyle="bold" />
 
         <EditText
-            android:autofillHints="emailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:hint="@string/first_name"
+            android:inputType="textCapSentences"
+            android:text="@={viewModel.firstName}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="@string/last_name"
+            android:inputType="textCapSentences"
+            android:text="@={viewModel.lastName}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:autofillHints="emailAddress"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:text="@={viewModel.email}" />
 
         <EditText
-            android:autofillHints="password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:autofillHints="password"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:text="@={viewModel.password}" />
 
         <EditText
-            android:autofillHints="password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:autofillHints="password"
             android:hint="@string/password_again"
             android:inputType="textPassword"
             android:text="@={viewModel.passwordAgain}" />

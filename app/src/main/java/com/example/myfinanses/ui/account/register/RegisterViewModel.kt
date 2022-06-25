@@ -2,6 +2,7 @@ package com.example.myfinanses.ui.account.register
 
 import android.util.Patterns
 import androidx.lifecycle.*
+import com.example.myfinanses.models.User
 import com.example.myfinanses.repositoris.signUp
 import kotlinx.coroutines.launch
 
@@ -10,25 +11,42 @@ class RegisterViewModel : ViewModel() {
     val register: LiveData<Pair<Boolean, String>>
         get() = _register
 
-    val email = MutableLiveData<String>()
-    val password = MutableLiveData<String>()
-    val passwordAgain = MutableLiveData<String>()
+    val firstName = MutableLiveData("")
+    val lastName = MutableLiveData("")
+    val email = MutableLiveData("")
+    val password = MutableLiveData("")
+    val passwordAgain = MutableLiveData("")
 
     val areInputsCorrect = MediatorLiveData<Boolean>().apply {
         addSource(email) {
-            value = isEmailCorrect()
+            value = isPasswordCorrect() && isPasswordAgainCorrect() && isEmailCorrect() &&
+                    isFirstNameCorrect() && isLastNameCorrect()
         }
         addSource(password) {
-            value = isPasswordCorrect()
+            value = isPasswordCorrect() && isPasswordAgainCorrect() && isEmailCorrect() &&
+                    isFirstNameCorrect() && isLastNameCorrect()
         }
         addSource(passwordAgain) {
-            value = isPasswordCorrect() && isPasswordAgainCorrect()
+            value = isPasswordCorrect() && isPasswordAgainCorrect() && isEmailCorrect() &&
+                    isFirstNameCorrect() && isLastNameCorrect()
+        }
+        addSource(firstName) {
+            value = isPasswordCorrect() && isPasswordAgainCorrect() && isEmailCorrect() &&
+                    isFirstNameCorrect() && isLastNameCorrect()
+        }
+        addSource(lastName) {
+            value = isPasswordCorrect() && isPasswordAgainCorrect() && isEmailCorrect() &&
+                    isFirstNameCorrect() && isLastNameCorrect()
         }
     }
 
     fun register() {
         viewModelScope.launch {
-            _register.signUp(email.value!!, password.value!!)
+            _register.signUp(
+                email.value!!,
+                password.value!!,
+                User(firstName.value!!, lastName.value!!)
+            )
         }
     }
 
@@ -38,8 +56,11 @@ class RegisterViewModel : ViewModel() {
         email.value!!.isNotBlank()
     }
 
+    private fun isFirstNameCorrect(): Boolean = firstName.value!!.isNotBlank()
+
+    private fun isLastNameCorrect(): Boolean = lastName.value!!.isNotBlank()
+
     private fun isPasswordCorrect(): Boolean = password.value?.length!! > 5
 
     private fun isPasswordAgainCorrect(): Boolean = password.value!! == passwordAgain.value!!
-
 }
