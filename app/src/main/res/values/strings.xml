@@ -34,4 +34,11 @@
     <string name="changePassword">Change Password</string>
     <string name="first_name">first name</string>
     <string name="last_name">last name</string>
+    <string name="price">Price</string>
+    <string name="value_of_financial_assets">Value of financial assets</string>
+    <string name="add_investment">Add investment</string>
+    <string name="asset_type">Asset type</string>
+    <string name="current_prices">Current prices</string>
+    <string name="buy_price">Buy price</string>
+    <string name="current_value_of_assets">Current value of assets</string>
 </resources>

@@ -5,56 +5,58 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.myfinanses.R
+import com.example.myfinanses.data.Asset
+import com.example.myfinanses.databinding.FragmentInvestAddBinding
+import com.example.myfinanses.ui.extensions.showSnackBar
+import com.example.myfinanses.ui.providers.SnackBarProvider
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InvestAddFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InvestAddFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel = InvestAddViewModel()
+    private lateinit var binding: FragmentInvestAddBinding
+    private lateinit var snackBarProvider: SnackBarProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_invest_add, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_invest_add,
+            container,
+            false
+        )
+
+        snackBarProvider = SnackBarProvider(requireActivity())
+
+        return binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@InvestAddFragment.viewModel
+        }.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InvestAddFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InvestAddFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val spinnerArray = arrayListOf<String>(
+            Asset.GOLD.name,
+            Asset.ETH.name,
+            Asset.BTC.name)
+        binding.addInvestType.adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.asset_type,
+            spinnerArray)
+
+        viewModel.add.observe(viewLifecycleOwner) {
+            snackBarProvider.showSnackBar(it)
+
+            if (it.first) {
+                findNavController().popBackStack()
             }
+        }
     }
+
 }

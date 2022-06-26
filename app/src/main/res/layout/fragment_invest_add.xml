@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.main.invest.InvestAddFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.myfinanses.ui.main.invest.InvestAddViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/add_investment"
+            android:textColor="@color/green"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:layout_margin="20dp"
+            android:id="@+id/add_invest_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selection="@{viewModel.assetType}"
+            android:hint="@string/asset_type" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="@string/buy_price"
+            android:inputType="number"
+            android:text="@={viewModel.buyPrice}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="@string/amount"
+            android:inputType="number"
+            android:text="@={viewModel.amount}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:enabled="@{viewModel.areInputsCorrect}"
+            android:onClick="@{()->viewModel.addInvest()}"
+            android:text="@string/add" />
+
+    </LinearLayout>
+
+</layout>

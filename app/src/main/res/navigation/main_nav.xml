@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_investFragment_to_investAddFragment"
             app:destination="@id/investAddFragment" />
+        <action
+            android:id="@+id/action_investFragment_to_investAssetsValueFragment"
+            app:destination="@id/investAssetsValueFragment" />
     </fragment>
     <fragment
         android:id="@+id/investAddFragment"
@@ -72,4 +75,9 @@
             android:name="date"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/investAssetsValueFragment"
+        android:name="com.example.myfinanses.ui.main.invest.InvestAssetsValueFragment"
+        android:label="fragment_invest_assets_value"
+        tools:layout="@layout/fragment_invest_assets_value" />
 </navigation>
