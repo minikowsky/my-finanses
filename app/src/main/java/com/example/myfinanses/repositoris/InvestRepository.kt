@@ -11,7 +11,7 @@ import com.google.firebase.database.ValueEventListener
 class InvestRepository {
 
     fun getInvests(getInvests: (List<Invest>) -> Unit) {
-        FirebaseReference.userReference
+        FirebaseReference.userReference.child("Invest")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var list = mutableListOf<Invest>()
@@ -49,7 +49,7 @@ class InvestRepository {
 fun MutableLiveData<Pair<Boolean, String>>.addInvest(
     invest: Invest,
 ) {
-    FirebaseReference.userReference.push()
+    FirebaseReference.userReference.child("Invest").push()
         .setValue(invest)
         .addOnCanceledListener {
             this.postValue(Pair(false, InvestRepository.ERROR_ADD))
@@ -63,7 +63,7 @@ fun MutableLiveData<Pair<Boolean, String>>.deleteInvest(
     invest: Invest,
 ) {
     val result = this
-    FirebaseReference.userReference
+    FirebaseReference.userReference.child("Invest")
         .addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 result.postValue(Pair(false, InvestRepository.ERROR_DELETE))
@@ -72,7 +72,7 @@ fun MutableLiveData<Pair<Boolean, String>>.deleteInvest(
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (row in snapshot.children) {
                     if (row.getValue(Invest::class.java)!! == invest) {
-                        FirebaseReference.userReference.child(row.key!!)
+                        FirebaseReference.userReference.child("Invest").child(row.key!!)
                             .removeValue()
                         result.postValue(Pair(true, InvestRepository.CORRECT_DELETE))
                     }

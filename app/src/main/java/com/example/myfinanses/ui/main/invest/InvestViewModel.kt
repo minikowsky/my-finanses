@@ -50,7 +50,7 @@ class InvestViewModel : ViewModel() {
         //TODO:
         var temp = 0.0
         list.forEach {
-            temp += it.buyPrice
+            temp += it.buyPrice * it.amount
         }
         total.value = "$temp $"
     }
