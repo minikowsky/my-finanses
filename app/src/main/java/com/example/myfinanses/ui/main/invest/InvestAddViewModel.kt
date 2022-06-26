@@ -1,5 +1,6 @@
 package com.example.myfinanses.ui.main.invest
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.myfinanses.data.Asset
 import com.example.myfinanses.data.Invest
@@ -47,6 +48,7 @@ class InvestAddViewModel : ViewModel() {
 
     fun addInvest() {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("ASSET TYPE",assetType.value!!.toString())
             val invest = Invest(
                 getAsset(assetType.value!!),
                 buyPrice.value!!.toDouble(),

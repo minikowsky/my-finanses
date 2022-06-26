@@ -12,7 +12,7 @@ class InvestRepository {
 
     fun getInvests(getInvests: (List<Invest>) -> Unit) {
         FirebaseReference.userReference.child("Invest")
-            .addListenerForSingleValueEvent(object : ValueEventListener {
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var list = mutableListOf<Invest>()
                     if(snapshot.exists()) {

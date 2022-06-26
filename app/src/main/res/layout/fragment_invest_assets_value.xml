@@ -109,7 +109,7 @@
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:gravity="start"
-                android:text="/1 coin   "/>
+                android:text="/1 coin  "/>
         </LinearLayout>
 
     </LinearLayout>
